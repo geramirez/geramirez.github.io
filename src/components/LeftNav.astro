@@ -1,3 +1,9 @@
+---
+const normalize = (path) => (path === "/" ? "/" : path.replace(/\/$/, ""));
+const currentPath = normalize(Astro.url.pathname);
+const isActive = (href) => normalize(href) === currentPath;
+---
+
 <div class="nav-container">
   <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation" />
 
@@ -17,9 +23,9 @@
       <h1 class="brand"><a href="/">Gabriel Ramírez</a></h1>
     </section>
     <section class="sidebar-section">
-      <a href="/work-experience">Work Experience</a>
-      <a href="/projects">Projects</a>
-      <a href="/about">About Me</a>
+      <a href="/work-experience" class:list={{ active: isActive('/work-experience') }}>Work Experience</a>
+      <a href="/projects" class:list={{ active: isActive('/projects') }}>Projects</a>
+      <a href="/about" class:list={{ active: isActive('/about') }}>About Me</a>
     </section>
     <hr>
     <section class="sidebar-section">
@@ -111,10 +117,17 @@
     text-decoration: none;
     padding: 8px 6px;
     border-radius: 6px;
+    transition: background 120ms ease, color 120ms ease;
   }
 
   .sidebar a:hover {
     background: #f3f4f6;
+  }
+
+  .sidebar a.active {
+    background: #e5e7eb;
+    color: #111827;
+    font-weight: 600;
   }
 
   .sidebar hr {
