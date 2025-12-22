@@ -1,7 +1,7 @@
 ---
-const normalize = (path) => (path === "/" ? "/" : path.replace(/\/$/, ""));
+const normalize = ( path: string ) => (path === "/" ? "/" : path.replace(/\/$/, ""));
 const currentPath = normalize(Astro.url.pathname);
-const isActive = (href) => normalize(href) === currentPath;
+const isActive = ( href: string ) => normalize(href) === currentPath;
 ---
 
 <div class="nav-container">
