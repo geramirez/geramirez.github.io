@@ -1,0 +1,79 @@
+<aside class="sidebar">
+    <section class="sidebar-section">
+        <h1 class="brand"><a href="/">Gabriel Ramírez</a></h1>
+    </section>
+    <section class="sidebar-section">
+        <a href="/work-experience">Work Experience</a>
+        <a href="/projects">Projects</a>
+        <a href="/about">About Me</a>
+    </section>
+    <hr>
+    <section class="sidebar-section">
+        <h2 class="section-title">Connect</h2>
+        <a href="https://github.com/geramirez">GitHub</a>
+        <a href="https://www.linkedin.com/in/gramire1/">LinkedIn</a>
+    </section>
+</aside>
+
+<style>
+  .sidebar {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px 20px;
+    width: 240px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    border-right: 1px solid #e5e7eb;
+    background: #fafafa;
+  }
+
+  .brand {
+    font-weight: 700;
+    margin: 0;
+    font-size: 1.4rem;
+    color: #111827;
+    text-decoration: none;
+  }
+
+  .sidebar-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .section-title {
+    padding: 8px 6px;
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sidebar a {
+    color: #374151;
+    text-decoration: none;
+    padding: 8px 6px;
+    border-radius: 6px;
+  }
+
+  .sidebar a:hover {
+    background: #f3f4f6;
+  }
+
+  .sidebar hr {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 0;
+  }
+</style>

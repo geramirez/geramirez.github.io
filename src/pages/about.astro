@@ -1,0 +1,77 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from 'astro:assets';
+
+import Freshroast from "../assets/freshroast.jpeg"
+import Network from "../assets/network-smaller.png"
+import Pottery from "../assets/pottery.jpeg"
+
+---
+
+<Layout>
+  <h1>About Me</h1>
+  <section class="identity">
+    <h2 class="identity-title">Software Engineer and Manager</h2>
+    <p class="identity-details">
+        Seasoned Lead Software Engineer and Engineering Manager with 15 years of experience specializing in system hands on engineering, software stabilization, cost reduction, and technical leadership.
+    </p>
+  </section>
+  
+  <hr>
+
+    <section class="identity">
+        <h2 class="identity-title">Computational Sociologist</h2>
+        <p class="identity-details">
+            I studied sociology, anthropology, ML, and Data Science. I also spent the early part of my career exploring social networks. I've continued to explore this area and recently wrote <a href="https://geramirez.github.io/gh-graph-explorer">Beyond the Org Chart: Using Social Network Analysis to tend to Engineering Teams</a> and was a guest on the <a href="Data Skeptic Podcast">Data Skeptic Podcast.</a>
+        </p>
+        <Image class="round" src={Network} alt="network analysis"/>
+    </section>
+  <hr>
+
+    <section class="identity">
+        <h2 class="identity-title">Coffee Roasting and Pottery</h2>
+        <p class="identity-details">
+            I've been roasting coffee for 5 years now. My dream is to one day be able to drink a coffee that I've cultivated, processed, roasted, ground, and brewed in a vessle that I created.
+        </p>
+        <Image class="round" src={Freshroast} alt="Roasting Coffee"/>
+        <Image class="round" src={Pottery} alt="my pottery"/>
+    </section>
+    
+    <hr>
+
+
+</Layout>
+
+
+<style>
+
+    h1, h2 {
+        text-align: center;
+    }
+
+    section.identity {
+        text-align: center;
+    }
+
+    section .identity-title {
+        font-size: 1.2rem;
+    }
+
+    section .identity-details {
+        font-size: 1.2rem;
+    }
+
+    img {
+        max-width: 300px;
+        height: auto;
+    }
+
+    .round {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        margin: 1rem;
+        object-fit: cover;
+    }
+
+</style>

@@ -1,0 +1,126 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const projects = [
+  {
+    title: "GH Signal",
+    description: "A Notifications Rule Engine for GitHub",
+  },
+  {
+    title: "gh-graph-explorer",
+    description: "A collection for tools for understanding GitHub interactions.",
+    links: [
+      { text: "tools", url: "https://github.com/geramirez/gh-graph-explorer" },
+      { text: "white paper", url: "https://geramirez.github.io/gh-graph-explorer/" },
+      { text: "podcast episode", url: "https://podcasts.apple.com/us/podcast/github-network-analysis/id890348705?i=1000714011045" },
+    ],
+  },
+  {
+    title: "Austin Splash Pad Checker",
+    description: "The code for a crowd sourced site to find out if Austin Splash Pads are open.",
+    links: [
+      { text: "GitHub", url: "https://github.com/geramirez/mueller-splash-pad" },
+    ],
+  },
+  {
+    title: "Croast",
+    description: "Tools to check Roasting ROR curves. Also an app used with an Arduino and thermocouple to roast coffee.",
+    links: [
+      { text: "GitHub", url: "https://github.com/geramirez/croast" },
+    ],
+  },
+  {
+    title: "Morse Code Interpreter",
+    description: "An exploration into event driven JS that can check morse code letter on the fly.",
+    links: [
+      { text: "GitHub", url: "https://github.com/geramirez/morse-code-interpreter" },
+    ],
+  },
+  {
+    title: "Stock Checker",
+    description: "A simple Elm app to check the price of stocks. Written to explore Elm and functional languages.",
+    links: [
+      { text: "GitHub", url: "https://github.com/geramirez/options-stock" },
+    ],
+  },
+  {
+    title: "GO Chat",
+    description: "An exploration into using Golang and event driven design to create a simple chat application.",
+    links: [
+      { text: "GitHub", url: "https://github.com/geramirez/private-chat" },
+    ],
+  },
+  {
+    title: "NextMetro",
+    description: "A toy application in early React code, built to check when the Next DC Metro was coming.",
+    links: [
+      { text: "GitHub", url: "https://github.com/geramirez/NextMetro" },
+    ],
+  },
+  {
+    title: "GA Auditor",
+    description: "A tool build to audit google analytics on sites.",
+    links: [
+      { text: "GitHub", url: "https://github.com/geramirez/ga-auditor" },
+    ],
+  },
+  {
+    title: "Spanish Readability Calculator",
+    description: "A tool that returns the readability score of Spanish text. Created by using a algorithm to detect syllables.",
+    links: [
+      { text: "GitHub", url: "https://github.com/geramirez/readability-tool/tree/master" },
+    ],
+  },
+];
+---
+
+<Layout>
+  <h1>Side Projects</h1>
+  
+  <ul class="projects-list">
+    {projects.map((project) => (
+      <li class="project-item">
+        <h2>{project.title}</h2>
+        <p>
+          {project.description}
+          {project.links && project.links.map((link, index) => (
+            <>
+              {index > 0 && ", "}
+              <a href={link.url} target="_blank" rel="noopener noreferrer">{link.text}</a>
+            </>
+          ))}
+        </p>
+      </li>
+    ))}
+  </ul>
+
+  <style>
+    .projects-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .project-item {
+      padding: 0rem;
+    }
+
+    .project-item h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.0rem;
+    }
+
+    .project-item p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .project-item a {
+      color: inherit;
+      text-decoration: underline;
+    }
+  </style>
+</Layout>
