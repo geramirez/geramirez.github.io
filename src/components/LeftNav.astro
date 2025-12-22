@@ -1,21 +1,66 @@
-<aside class="sidebar">
+<div class="nav-container">
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation" />
+
+  <label class="mobile-toggle" for="nav-toggle">
+    <span class="brand">Gabriel Ramírez</span>
+    <span class="burger" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+  </label>
+
+  <label class="backdrop" for="nav-toggle" aria-hidden="true"></label>
+
+  <aside class="sidebar" id="sidebar-nav">
     <section class="sidebar-section">
-        <h1 class="brand"><a href="/">Gabriel Ramírez</a></h1>
+      <h1 class="brand"><a href="/">Gabriel Ramírez</a></h1>
     </section>
     <section class="sidebar-section">
-        <a href="/work-experience">Work Experience</a>
-        <a href="/projects">Projects</a>
-        <a href="/about">About Me</a>
+      <a href="/work-experience">Work Experience</a>
+      <a href="/projects">Projects</a>
+      <a href="/about">About Me</a>
     </section>
     <hr>
     <section class="sidebar-section">
-        <h2 class="section-title">Connect</h2>
-        <a href="https://github.com/geramirez">GitHub</a>
-        <a href="https://www.linkedin.com/in/gramire1/">LinkedIn</a>
+      <h2 class="section-title">Connect</h2>
+      <a href="https://github.com/geramirez">GitHub</a>
+      <a href="https://www.linkedin.com/in/gramire1/">LinkedIn</a>
     </section>
-</aside>
+  </aside>
+</div>
 
 <style>
+  .nav-container {
+    position: relative;
+    width: 240px;
+    margin: 0;
+  }
+
+  .nav-toggle {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .mobile-toggle {
+    display: none;
+  }
+
+  .burger {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .burger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #111827;
+    transition: transform 150ms ease, opacity 150ms ease;
+  }
+
   .sidebar {
     position: sticky;
     top: 0;
@@ -29,6 +74,7 @@
     box-sizing: border-box;
     border-right: 1px solid #e5e7eb;
     background: #fafafa;
+    z-index: 2;
   }
 
   .brand {
@@ -75,5 +121,101 @@
     border: none;
     border-top: 1px solid #e5e7eb;
     margin: 0;
+  }
+
+  .backdrop {
+    display: none;
+  }
+
+  @media (max-width: 900px) {
+    /* Hide duplicate brand inside the slide-out; mobile toggle already shows it */
+    .sidebar .brand:first-of-type {
+      display: none;
+    }
+
+    .nav-container {
+      position: relative;
+      width: auto;
+      max-width: 100%;
+      z-index: 10;
+    }
+
+    .mobile-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      background: #fafafa;
+      border-bottom: 1px solid #e5e7eb;
+      font-weight: 700;
+      font-size: 1rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 13;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 58px;
+      bottom: 0;
+      left: 0;
+      width: min(280px, 85vw);
+      min-height: calc(100vh - 58px);
+      border-right: 1px solid #e5e7eb;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.14);
+      transform: translateX(-100%);
+      transition: transform 180ms ease-out;
+      background: #fafafa;
+      pointer-events: auto;
+      z-index: 12;
+    }
+
+    .nav-toggle:checked ~ .sidebar {
+      transform: translateX(0);
+    }
+
+    .nav-toggle:checked ~ .mobile-toggle .burger span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle:checked ~ .mobile-toggle .burger span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle:checked ~ .mobile-toggle .burger span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .backdrop {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.28);
+      opacity: 0;
+      transition: opacity 150ms ease;
+      pointer-events: none;
+      z-index: 11;
+      cursor: pointer;
+    }
+
+    .nav-toggle:checked ~ .backdrop {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Keep nav content from pushing layout on mobile */
+    .nav-toggle:not(:checked) ~ .sidebar {
+      transform: translateX(-100%);
+    }
+
+    .nav-toggle:checked ~ .sidebar,
+    .nav-toggle:checked ~ .backdrop {
+      pointer-events: auto;
+    }
   }
 </style>
