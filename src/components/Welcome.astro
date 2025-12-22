@@ -1,2 +1,40 @@
 ---
+import Pottery from "../assets/pottery-art.jpg"
+import { Image } from 'astro:assets';
 ---
+
+<main>
+
+  <section class="hero">
+    <h1>Hi, I’m Gabriel.</h1>
+    <p class="subtitle">
+      Software engineer and engineering leader.
+    </p>
+    <p>
+      I build reliable backend systems, lead technical initiatives,
+      and help teams ship products from early ideas to production scale.
+    </p>
+
+    <Image class="round" src={Pottery} alt="my pottery"/>
+
+
+  </section>
+
+</main>
+
+<style>
+
+    .hero {
+        text-align: center;
+    }
+
+
+    .round {
+        width: 500px;
+        height: 300px;
+        border-radius: 20%;
+        margin: 1rem;
+        object-fit: cover;
+    }
+
+</style>
