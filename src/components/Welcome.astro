@@ -15,7 +15,7 @@ import { Image } from 'astro:assets';
       and help teams ship products from early ideas to production scale.
     </p>
 
-    <Image class="round" src={Pottery} alt="my pottery"/>
+    <Image class="home-image" src={Pottery} alt="my pottery"/>
 
 
   </section>
@@ -32,12 +32,11 @@ import { Image } from 'astro:assets';
     font-size: var(--font-size-2);
   }
 
-
-    .round {
-        width: 30rem;
-        height: 15rem;
-        border-radius: 20%;
-        margin: 1rem;
+    .home-image {
+        width: 20em;
+        height: 10em;
+        border-radius: 10%;
+        margin: .1em;
         object-fit: cover;
     }
 

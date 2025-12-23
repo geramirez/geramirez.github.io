@@ -36,6 +36,31 @@ const isActive = ( href: string ) => normalize(href) === currentPath;
   </aside>
 </div>
 
+<script>
+  // Keep the mobile sidebar aligned below the header across devices
+  const setMobileHeaderHeight = () => {
+    const container = document.querySelector('.nav-container');
+    const header = document.querySelector('.mobile-toggle');
+    if (container && header) {
+      const h = (header as HTMLElement).offsetHeight || 58;
+      (container as HTMLElement).style.setProperty('--mobile-header-h', `${h}px`);
+    }
+  };
+
+  // Initialize and keep in sync with viewport / font changes
+  if (typeof window !== 'undefined') {
+    // Run asap after layout
+    setMobileHeaderHeight();
+    // Recompute on resize and orientation changes
+    window.addEventListener('resize', setMobileHeaderHeight, { passive: true });
+    window.addEventListener('orientationchange', setMobileHeaderHeight, { passive: true });
+    // Recompute after fonts load (sizes can change)
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(setMobileHeaderHeight).catch(() => {});
+    }
+  }
+</script>
+
 <style>
   .nav-container {
     position: relative;
@@ -148,6 +173,8 @@ const isActive = ( href: string ) => normalize(href) === currentPath;
       width: auto;
       max-width: 100%;
       z-index: 10;
+      /* Default; updated dynamically via script for accuracy */
+      --mobile-header-h: 58px;
     }
 
     .mobile-toggle {
@@ -156,6 +183,13 @@ const isActive = ( href: string ) => normalize(href) === currentPath;
       justify-content: space-between;
       gap: 12px;
       padding: 14px 16px;
+      /* Safe-area support (iOS notch, cutouts). Provide base first, override where supported. */
+      padding-top: 14px;
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-top: calc(14px + env(safe-area-inset-top));
+      padding-left: calc(16px + env(safe-area-inset-left));
+      padding-right: calc(16px + env(safe-area-inset-right));
       background: #fafafa;
       border-bottom: 1px solid #e5e7eb;
       font-weight: 700;
@@ -171,11 +205,13 @@ const isActive = ( href: string ) => normalize(href) === currentPath;
 
     .sidebar {
       position: fixed;
-      top: 58px;
-      bottom: 0;
+      top: var(--mobile-header-h, 58px);
       left: 0;
       width: min(280px, 85vw);
-      min-height: calc(100vh - 58px);
+      height: calc(100dvh - var(--mobile-header-h, 58px));
+      /* Scroll content if taller than viewport */
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
       border-right: 1px solid #e5e7eb;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.14);
       transform: translateX(-100%);
@@ -183,6 +219,10 @@ const isActive = ( href: string ) => normalize(href) === currentPath;
       background: #fafafa;
       pointer-events: auto;
       z-index: 12;
+      will-change: transform;
+      /* Safe-area left padding for landscape notch devices. Base first, then override. */
+      padding-left: 20px;
+      padding-left: calc(20px + env(safe-area-inset-left));
     }
 
     .nav-toggle:checked ~ .sidebar {
@@ -226,6 +266,16 @@ const isActive = ( href: string ) => normalize(href) === currentPath;
     .nav-toggle:checked ~ .sidebar,
     .nav-toggle:checked ~ .backdrop {
       pointer-events: auto;
+    }
+  }
+
+  /* Respect user preference to reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    .sidebar {
+      transition: none !important;
+    }
+    .burger span {
+      transition: none !important;
     }
   }
 </style>
