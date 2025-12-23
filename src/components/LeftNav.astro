@@ -86,7 +86,7 @@ const isActive = ( href: string ) => normalize(href) === currentPath;
   .brand {
     font-weight: 700;
     margin: 0;
-    font-size: 1.4rem;
+    font-size: var(--font-size-4);
     color: #111827;
     text-decoration: none;
   }
@@ -100,7 +100,7 @@ const isActive = ( href: string ) => normalize(href) === currentPath;
   .section-title {
     padding: 8px 6px;
     margin: 0;
-    font-size: 1.2rem;
+    font-size: var(--font-size-2);
   }
 
   .menu {
@@ -141,7 +141,7 @@ const isActive = ( href: string ) => normalize(href) === currentPath;
   }
 
   @media (max-width: 900px) {
-    /* Hide duplicate brand inside the slide-out; mobile toggle already shows it */
+    /* Show brand inside the slide-out on mobile as well */
 
     .nav-container {
       position: relative;
@@ -159,7 +159,7 @@ const isActive = ( href: string ) => normalize(href) === currentPath;
       background: #fafafa;
       border-bottom: 1px solid #e5e7eb;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: var(--font-size-1);
       position: fixed;
       top: 0;
       left: 0;
